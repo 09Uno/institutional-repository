@@ -1,4 +1,90 @@
 /** General **/
+
+
+
+/** personalizada **/
+
+.work-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.container-main {
+    flex-basis: 65%; /* Ajuste a largura do conteúdo principal conforme necessário */
+}
+
+.container-sec {
+    flex-basis: 35%; /* Ajuste a largura do segundo container conforme necessário */
+}
+
+.container_line_1 {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.autor {
+    margin-right: 30px;
+}
+
+.text-to-name {
+    font-weight: bold;
+    color: #555;
+}
+
+.container_line_2 {
+    display: flex;
+    align-items: center;
+}
+
+.presentation {
+    margin-right: 20px;
+}
+
+.advisor {
+    margin-right: 20px;
+}
+
+/* Adicione cores personalizadas aqui */
+.work-title {
+    color: #337ab7;
+}
+
+.text-to-name {
+    color: #337ab7;
+}
+
+.presentation p {
+    color: #999;
+}
+
+.keywords {
+    color: #5d81a0;
+    font-weight: bold;
+    margin-right: 5px;
+}
+.ilustation {
+    width: 110px; /* Defina a largura desejada */
+    height: 135px; /* Defina a altura desejada */
+    background-color: #ccc; /* Cor de fundo da ilustração */
+    /* Adicione outros estilos personalizados conforme necessário */
+  }
+  
+  
+
+/** personalizada **/
+
+
+
+
 html, body
 {
     height: 95.5%;
@@ -140,7 +226,7 @@ ul.navbar-top-links .open>a, ul.navbar-top-links .open>a:hover, ul.navbar-top-li
 /** Panels **/
 .panel{
     border-radius: initial;
-    background: #fff;
+    background: #ffffff;
     min-height: 50px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     position: relative;
@@ -812,6 +898,7 @@ nav.navbar {
     border-top: 0;
 }
 
+   
 /** Dropdowns **/
 .dropdown-menu>li>a
 {

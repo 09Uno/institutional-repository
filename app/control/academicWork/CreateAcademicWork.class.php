@@ -15,7 +15,6 @@ use Adianti\Wrapper\BootstrapFormBuilder;
 
 class CreateAcademicWork extends TPage
 {
-    private $form; // rótulo
 
     public function __construct()
     {
@@ -24,6 +23,7 @@ class CreateAcademicWork extends TPage
         
         
         $this->form = new BootstrapFormBuilder;
+        
         $this->form->setFormTitle('Cadastrar Trabalho Acadêmico');
         $this->form->generateAria();
         

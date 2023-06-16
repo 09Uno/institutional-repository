@@ -233,6 +233,7 @@ INSERT INTO system_group_program VALUES(69,2,48);
 INSERT INTO system_group_program VALUES(70,2,49);
 INSERT INTO system_group_program VALUES(71,2,55);
 INSERT INTO system_group_program VALUES(72,2,56);
+
 INSERT INTO system_group_program VALUES(73,2,61);
 
 --- Dá a permissão ao standard e ao admin a acessar o cadastro de trabalhos
