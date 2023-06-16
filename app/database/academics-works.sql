@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS academics_works (
   advisor VARCHAR(255) NOT NULL,
   abstract TEXT NOT NULL,
   keywords VARCHAR(255) NOT NULL,
-  presentation_date DATE ,
-  research_area VARCHAR(255) NOT NULL
+  presentation_date DATE,
+  research_area VARCHAR(255) NOT NULL,
+  isApproved BOOLEAN NOT NULL DEFAULT FALSE
 );
