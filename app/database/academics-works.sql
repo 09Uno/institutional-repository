@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS academics_works (
   keywords VARCHAR(255) NOT NULL,
   presentation_date DATE,
   research_area VARCHAR(255) NOT NULL,
+  files VARCHAR(255) NOT NULL,
   isApproved BOOLEAN NOT NULL DEFAULT FALSE
 );
