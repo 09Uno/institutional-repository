@@ -1,0 +1,54 @@
+<!--[main]-->
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="work-title">
+            {$title}
+        </div>
+        <div class="container-wrapper">
+            <div class="container-main">
+                <div class="container_line_1">
+                    <div class="autor">
+                        <span class="text-to-name">Autores:</span><br>
+                        <!--[authors]-->
+                        <span class="text-to-name">{$authors}</span><br>
+                        <!--[/authors]-->
+                    </div>
+                    <div class="advisor">
+                        <span class="text-to-name">Orientadores:</span><br>
+                        <!--[advisors]-->
+                        <span class="text-to-name"><sup>{$i}</sup>{$advisors}</span><br>
+                        <!--[/advisors]-->
+                    </div>
+                </div>
+                <div class="container_line_2">
+                    <div class="presentation">
+                        <p>Data de apresentação: {$date}</p>
+                    </div>
+                </div>
+                <div class="container_line_3">
+                    <div class="keywords">
+                        <p>Palavras-chave: {$keywords}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-sec">
+                <div class="container_line_2">
+                    <div class="file">
+                        <div class="ilustation"></div>
+                        <p>Ver: <a href="{$file}">{$file-label}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a href="index.php?class=ReviewWork&method=onApproveClick&work_id={$work_id}" class="btn btn-sm btn-success" style="background-color: #3d8d3d; margin-right: 10px;">
+                <span><i class="fa fa-check" style="padding-right: 4px;"></i>Aprovar</span>
+            </a>            
+            <a href="index.php?class=ReviewWork&method=onDisapproveClick&work_id={$work_id}" class="btn btn-sm btn-primary" style="background-color: hsl(347, 89%, 58%);">
+                <span><i class="fa fa-trash" style="padding-right:4px"></i>Reprovar</span>
+            </a>
+        </div>
+    </div>
+
+    <!--[/main]-->

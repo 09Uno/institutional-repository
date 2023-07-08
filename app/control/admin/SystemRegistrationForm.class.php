@@ -15,7 +15,9 @@ class SystemRegistrationForm extends TPage
 {
     protected $form; // form
     protected $program_list;
-    
+      
+
+
     /**
      * Class constructor
      * Creates the page and the registration form
@@ -37,7 +39,7 @@ class SystemRegistrationForm extends TPage
         $repassword = new TPassword('repassword');
         $group = new TEntry('group');
         
-        
+
 
         
         $this->form->addAction( _t('Save'),  new TAction([$this, 'onSave']), 'far:save')->{'class'} = 'btn btn-sm btn-primary';
