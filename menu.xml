@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
+  <menuitem label="Listar Trabalhos">
+    <action>ListApprovedWorks</action>
+    <icon>fas:align-justify fa-fw</icon>
+  </menuitem>
   <menuitem label="Adicionar  Produção">
     <action>CreateAcademicWork</action>
     <icon>fas:file-alt fa-fw</icon>

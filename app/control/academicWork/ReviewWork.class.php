@@ -4,7 +4,7 @@
 class ReviewWork extends TPage
 {
     private $html;
-
+    
     public function __construct()
     {
         parent::__construct();
@@ -76,13 +76,13 @@ class ReviewWork extends TPage
 
                     // Wrap the page content using a vertical box
                     $vbox = new TVBox;
+                  
                     $vbox->style = 'width: 100%';
                     $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
-
-
                     $vbox->add($html);
                     parent::add($vbox);
                 }
+                     
             }
 
             TTransaction::close();

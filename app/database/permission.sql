@@ -137,7 +137,14 @@ INSERT INTO system_program VALUES(59,'System Wiki form', 'SystemWikiForm');
 INSERT INTO system_program VALUES(60,'System Wiki search', 'SystemWikiSearchList');
 INSERT INTO system_program VALUES(61,'System Wiki view', 'SystemWikiView');
 
-INSERT INTO system_program VALUES(63,'Create Academic Work ', 'CreateAcademicWork');
+            --cadastrar página para a reprovação de trabalhos acadêmicos
+            INSERT INTO system_program VALUES(62,'ReviewWork', 'ReviewWork');
+
+            --- cadastrar a página de criar trabalho acadêmicos
+            INSERT INTO system_program VALUES(63,'Create Academic Work ', 'CreateAcademicWork');
+
+            --- cadastrar a página de listar trabalho acadêmicos
+            INSERT INTO system_program VALUES(64,'List Approved Work ', 'ListApprovedWorks');
 
 INSERT INTO system_user VALUES(1,'Administrator','admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.net','Y','+123 456 789','Admin Street, 123','Administrator','I''m the administrator',NULL,NULL,10,NULL,'Y');
 INSERT INTO system_user VALUES(2,'User','user','ee11cbb19052e40b07aac0ca060c23ee','user@user.net','Y','+123 456 789','User Street, 123','End user','I''m the end user',NULL,NULL,7,NULL,'Y');
@@ -240,7 +247,15 @@ INSERT INTO system_group_program VALUES(73,2,61);
 INSERT INTO system_group_program VALUES(74,2,62);
 INSERT INTO system_group_program VALUES(75,1,62);
 
+---permissão para o admin acessar a welcome page
 INSERT INTO system_group_program VALUES(76,1,10);
+
+--permisão para o admin acessar a pagina aprovar trabalhos
+INSERT INTO system_group_program VALUES(77,1,63);
+
+---permissão para o admin acessar a listagem de trabalhos
+INSERT INTO system_group_program VALUES(128,1,64);
+
 
 
 INSERT INTO system_user_program VALUES(1,2,7);
