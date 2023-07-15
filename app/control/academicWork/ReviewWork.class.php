@@ -1,10 +1,11 @@
 <?php
+use Adianti\Database\TTransaction;
 
 
 class ReviewWork extends TPage
 {
     private $html;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -76,13 +77,13 @@ class ReviewWork extends TPage
 
                     // Wrap the page content using a vertical box
                     $vbox = new TVBox;
-                  
+
                     $vbox->style = 'width: 100%';
                     $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
                     $vbox->add($html);
                     parent::add($vbox);
                 }
-                     
+
             }
 
             TTransaction::close();
@@ -118,7 +119,7 @@ class ReviewWork extends TPage
             if ($work != null) {
                 $work->isApproved = 1;
                 $work->store();
-                TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
+           
             }
             TTransaction::close();
 
@@ -146,6 +147,7 @@ class ReviewWork extends TPage
 
         new TQuestion('Realmente deseja reprovar a postagem do trabalho?, <br/> O 
         trabalho será removido do banco de dados!', $action1, $action2);
+
     }
 
     function onDisapprove($param)
@@ -154,12 +156,12 @@ class ReviewWork extends TPage
             TTransaction::open('works');
 
             $work_id = $param['parameter'];
-            $work = new AcademicWork;
-            $work->load($work_id);
+            $work = new AcademicWork($work_id);
             $work->delete();
 
             TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
 
+           
             TTransaction::close();
         } catch (Exception $e) {
             TToast::show('error', 'Erro ao realizar ação', 'top right', 'fas:exclamation-triangle');
