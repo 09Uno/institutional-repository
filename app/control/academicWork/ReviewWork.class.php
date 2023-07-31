@@ -1,5 +1,12 @@
 <?php
+use Adianti\Control\TPage;
+use Adianti\Control\TWindow;
 use Adianti\Database\TTransaction;
+use Adianti\Widget\Base\TElement;
+use Adianti\Widget\Dialog\TInputDialog;
+use Adianti\Widget\Form\TEntry;
+use Adianti\Widget\Form\TLabel;
+use Adianti\Wrapper\BootstrapFormBuilder;
 
 
 class ReviewWork extends TPage
@@ -35,7 +42,10 @@ class ReviewWork extends TPage
                     );
                 }
 
+                $vbox = new TVBox;
 
+                $vbox->style = 'width: 100%';
+                $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
                 foreach ($academic_works as $academic_work) {
                     $authors = explode(',', $academic_work->author);
                     $advisors = explode(',', $academic_work->advisor);
@@ -79,7 +89,7 @@ class ReviewWork extends TPage
                     $vbox = new TVBox;
 
                     $vbox->style = 'width: 100%';
-                    $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
+                    // $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
                     $vbox->add($html);
                     parent::add($vbox);
                 }
@@ -95,6 +105,52 @@ class ReviewWork extends TPage
 
     }
 
+
+    function testePHP()
+    {
+
+      
+    }
+
+    function onFileClick($param)
+    {
+        TTransaction::open('works');
+
+        if (isset($_GET['work_id'])) {
+            $work_id = $_GET['work_id'];
+            $work = AcademicWork::find($work_id);
+
+            if ($work) {
+                $file = $work->file;
+                $file_data = json_decode(urldecode($file), true);
+                
+                if (isset($file_data['fileName']) && file_exists($file_data['fileName'])) {
+                    $file_name = $file_data['fileName'];
+                 
+                
+                    $window = TWindow::create('Arquivo PDF', 800, 600);
+                    $object = new TElement('object');
+                    $object->data = $file_name; 
+                    $object->data = 'tmp/pdf_janela.pdf'; 
+                    $object->type = 'application/pdf';
+                    $object->style = "width: 100%; height: calc(100% - 10px)";
+                    $window->add($object);
+                    $window->show();
+                    
+                } else {
+                    echo 'Arquivo não encontrado.';
+                }
+            } else {
+                echo 'Trabalho acadêmico não encontrado.';
+            }
+        } else {
+            echo 'ID do trabalho acadêmico ausente ou inválido.';
+        }
+
+        TTransaction::close();
+    }
+
+
     function onApproveClick()
     {
         $work_id = $_GET['work_id'];
@@ -104,8 +160,14 @@ class ReviewWork extends TPage
         $action1->setParameter('parameter', $work_id);
         $action2->setParameter('parameter', 2);
 
-        new TQuestion('Realmente deseja aprovar a postagem e armazenamento deste trabalho?', $action1, $action2);
+        $form = new BootstrapFormBuilder('form_approve');
+        $comment = new TText('comment');
+        $form->addFields([new TLabel('Comentário')], [$comment]);
+        $form->addAction('Aprovar', $action1, 'fa:save green');
+        $form->addAction('Cancelar', $action2, 'fa:save red');
 
+        new TInputDialog('Aprovar Trabalho', $form);
+        TScript::create(" tmenubox_open('Aprovar Trabalho', '{$form}'); ");
 
     }
     public static function onAprove($param)
@@ -119,7 +181,13 @@ class ReviewWork extends TPage
             if ($work != null) {
                 $work->isApproved = 1;
                 $work->store();
-           
+                $user_id = $work->user_id;
+
+                $comment = $param['comment'];
+
+
+                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'class=CreateAcademicWork', 'Ver Trabalho');
+
             }
             TTransaction::close();
 
@@ -145,8 +213,14 @@ class ReviewWork extends TPage
         $action1->setParameter('parameter', $work_id);
         $action2->setParameter('parameter', 2);
 
-        new TQuestion('Realmente deseja reprovar a postagem do trabalho?, <br/> O 
-        trabalho será removido do banco de dados!', $action1, $action2);
+        $form = new BootstrapFormBuilder('form_approve');
+        $comment = new TText('comment');
+        $form->addFields([new TLabel('Comentário')], [$comment]);
+        $form->addAction('Desaprovar', $action1, 'fa:save green');
+        $form->addAction('Cancelar', $action2, 'fa:save red');
+
+        new TInputDialog('Reprovar Trabalho', $form);
+        TScript::create(" tmenubox_open('Desaprovar Trabalho', '{$form}'); ");
 
     }
 
@@ -157,16 +231,23 @@ class ReviewWork extends TPage
 
             $work_id = $param['parameter'];
             $work = new AcademicWork($work_id);
+
+            $user_id = $work->user_id;
             $work->delete();
+            $comment = $param['comment'];
+            SystemNotification::register($user_id, 'Trabalho Reprovado', $comment, 'class=CreateAcademicWork', '');
 
             TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
 
-           
+
+
             TTransaction::close();
         } catch (Exception $e) {
             TToast::show('error', 'Erro ao realizar ação', 'top right', 'fas:exclamation-triangle');
         }
     }
+
+
 
 
 }

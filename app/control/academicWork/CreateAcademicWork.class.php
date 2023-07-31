@@ -10,7 +10,7 @@ use Adianti\Widget\Form\TLabel;
 use Adianti\Widget\Form\TMultiEntry;
 use Adianti\Widget\Form\TText;
 use Adianti\Wrapper\BootstrapFormBuilder;
-
+use Adianti\Base\AdiantiFileSaveTrait;
 
 
 class CreateAcademicWork extends TPage
@@ -93,6 +93,7 @@ class CreateAcademicWork extends TPage
             $academic_work->presentation_date = $data->presentation_date;
             $academic_work->research_area = $data->research_area;
             $academic_work->file = $data->file;
+            $academic_work->user_id = TSession::getValue('userid');
 
             $academic_work->store();
 
