@@ -22,6 +22,7 @@ class AcademicWork extends TRecord{
         parent::addAttribute('presentation_date');
         parent::addAttribute('research_area');
         parent::addAttribute('file');
+        parent::addAttribute('user_id');
         parent::addAttribute('isApproved');
 
     }
