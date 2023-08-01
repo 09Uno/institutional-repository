@@ -3,7 +3,7 @@
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="work-title">
-            <a href="index.php?class=ViewAcademicWork&workId={$work_id}" generator="adianti">{$title}</a>
+            {$title}
         </div>
         <div class="container-wrapper">
             <div class="container-main">
@@ -32,6 +32,14 @@
                         <p>Palavras-chave: {$keywords}</p>
                     </div>
                 </div>
+                <div class="container_line_4">
+                    <span>Resumo:</span>
+                    <div class="panel" style="margin-right: 2rem; padding: 1rem;">
+                        <div class="abstract">
+                            {$abstract}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="container-sec">
                 <div class="container_line_2">
@@ -42,15 +50,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="panel-footer">
-            <a href="index.php?class=ReviewWork&method=onApproveClick&work_id={$work_id}" class="btn btn-sm btn-success" style="background-color: #3d8d3d; margin-right: 10px;">
-                <span><i class="fa fa-check" style="padding-right: 4px;"></i>Aprovar</span>
-            </a>            
-            <a href="index.php?class=ReviewWork&method=onDisapproveClick&work_id={$work_id}" class="btn btn-sm btn-primary" style="background-color: hsl(347, 89%, 58%);">
-                <span><i class="fa fa-trash" style="padding-right:4px"></i>Reprovar</span>
-            </a>
-        </div> -->
     </div>
 
     <!--[/main]-->

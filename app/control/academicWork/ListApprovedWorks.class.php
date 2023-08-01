@@ -1,5 +1,6 @@
 <?php
 use Adianti\Control\TAction;
+//use Adianti\Control\TActionUrl;
 use Adianti\Control\TPage;
 use Adianti\Database\TTransaction;
 use Adianti\Widget\Container\TVBox;
@@ -54,14 +55,18 @@ class ListApprovedWorks extends TPage
                 $advisors = explode(',', $academic_work['advisor']);
 
                 $work_id = $academic_work['id'];
-
+                
+                // $url = TActionUrl::create('ViewAcademicWork', ['work_id' => $work_id]);
+                // $link = $html->getSection('main', 'title');
+                // $link->add(new TAction([$this, 'onRedirect'], ['url' => $url]));
+            
                 $html = new THtmlRenderer('app/resources/work-approved-list.html');
 
                 $replaces = [
                     'title' => $academic_work['title'],
                     'date' => $academic_work['presentation_date'],
                     'keywords' => $academic_work['keywords'],
-                    'file' => $academic_work['file'],
+                    //'file' => $academic_work['file'],
                     'file-label' => 'Arquivo PDF',
                     'work_id' => $work_id,
                 ];
@@ -97,4 +102,10 @@ class ListApprovedWorks extends TPage
         TTransaction::close();
         return $academic_works;
     }
+
+    // public function onRedirect($param) {
+    //     if (!empty($param['url'])) {
+    //         TScript::create("window.location.href = '{$param['url']}'");
+    //     }
+    // }
 }

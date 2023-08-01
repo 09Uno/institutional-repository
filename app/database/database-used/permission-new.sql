@@ -141,6 +141,9 @@ INSERT INTO system_program VALUES(61,'System Wiki view', 'SystemWikiView');
             --- cadastrar a página de listar trabalho acadêmicos
             INSERT INTO system_program VALUES(64,'List Approved Work ', 'ListApprovedWorks');
 
+            --- cadastrar a página de trabalho acadêmico específico
+            INSERT INTO system_program VALUES(65, 'View Academic Work', 'ViewAcademicWork');
+
             
 INSERT INTO system_user VALUES(1,'Administrator','admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.net','Y','+123 456 789','Admin Street, 123','Administrator','I''m the administrator',NULL,NULL,10,NULL,'Y');
 INSERT INTO system_user VALUES(2,'User','user','ee11cbb19052e40b07aac0ca060c23ee','user@user.net','Y','+123 456 789','User Street, 123','End user','I''m the end user',NULL,NULL,7,NULL,'Y');
@@ -245,6 +248,9 @@ INSERT INTO system_group_program VALUES(77,1,63);
 ---permissão para o admin acessar a listagem de trabalhos
 INSERT INTO system_group_program VALUES(128,1,64);
 
+---permissão ao standard e ao admin para acessar a página de trabalho específica
+INSERT INTO system_group_program VALUES(129, 1, 65);
+INSERT INTO system_group_program VALUES(130, 2, 65);
 
 
 INSERT INTO system_user_program VALUES(1,2,7);
