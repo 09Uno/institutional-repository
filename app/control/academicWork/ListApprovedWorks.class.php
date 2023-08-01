@@ -97,4 +97,42 @@ class ListApprovedWorks extends TPage
         TTransaction::close();
         return $academic_works;
     }
+
+    function onFileClick($param)
+    {
+        TTransaction::open('works');
+
+        if (isset($_GET['work_id'])) {
+            $work_id = $_GET['work_id'];
+            $work = AcademicWork::find($work_id);
+
+            if ($work) {
+                $file = $work->file;
+                $file_data = json_decode(urldecode($file), true);
+
+                if (isset($file_data['fileName']) && file_exists($file_data['fileName'])) {
+                    $file_name = $file_data['fileName'];
+
+                    $window = TWindow::create('Arquivo PDF', 0.8, 0.8);
+                    $object = new TElement('object');
+                    $object->data = $file_name;
+                    $object->type = 'application/pdf';
+                    $object->style = "width: 100%; height: calc(100% - 10px)";
+                 
+                    $window->add($object);
+                    $window->show();
+
+                } else {
+                    echo 'Arquivo não encontrado.';
+                }
+            } else {
+                echo 'Trabalho acadêmico não encontrado.';
+            }
+        } else {
+            echo 'ID do trabalho acadêmico ausente ou inválido.';
+        }
+
+        TTransaction::close();
+    }
+
 }

@@ -109,7 +109,7 @@ class ReviewWork extends TPage
     function testePHP()
     {
 
-      
+
     }
 
     function onFileClick($param)
@@ -123,20 +123,22 @@ class ReviewWork extends TPage
             if ($work) {
                 $file = $work->file;
                 $file_data = json_decode(urldecode($file), true);
-                
+
                 if (isset($file_data['fileName']) && file_exists($file_data['fileName'])) {
                     $file_name = $file_data['fileName'];
-                 
-                    $window = TWindow::create('Arquivo PDF', 800, 600);
+
+                    $window = TWindow::create('Arquivo PDF', 0.8, 0.8);
                     $object = new TElement('object');
-                    // $object->data = $file_name;
-                    $object->data = 'C://xampp//htdocs//modelo//tmp//pdf_janela.pdf';
+                    $object->data = $file_name;
                     $object->type = 'application/pdf';
                     $object->style = "width: 100%; height: calc(100% - 10px)";
-
+                 
                     $window->add($object);
                     $window->show();
-                    
+
+
+
+
                 } else {
                     echo 'Arquivo não encontrado.';
                 }
