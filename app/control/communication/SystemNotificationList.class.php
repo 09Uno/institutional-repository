@@ -147,11 +147,11 @@ class SystemNotificationList extends TStandardList
             else
             {
                 $button->href = 'index.php?class=SystemNotificationFormView&method=onExecuteAction&id='.$object->id;
-                $icon = $object->icon;
-                $icon    = str_replace( 'fa fa-', 'fa:', $icon);
-                $icon    = str_replace( 'far fa-', 'far:', $icon);
-                $icon    = str_replace( 'fas fa-', 'fas:', $icon);
-                $button->add( new TImage( $icon ) );
+                // $icon = $object->icon;
+                // $icon    = str_replace( 'fa fa-', 'fa:', $icon);
+                // $icon    = str_replace( 'far fa-', 'far:', $icon);
+                // $icon    = str_replace( 'fas fa-', 'fas:', $icon);
+                // $button->add( new TImage( $icon ) );
                 $button->add( TElement::tag('span', $object->action_label ) );
             }
             
