@@ -188,7 +188,7 @@ class ReviewWork extends TPage
                 $comment = $param['comment'];
 
 
-                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'class=CreateAcademicWork', 'Ver Trabalho');
+                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'Ver', 'class=CreateAcademicWork');
 
             }
             TTransaction::close();
@@ -237,7 +237,8 @@ class ReviewWork extends TPage
             $user_id = $work->user_id;
             $work->delete();
             $comment = $param['comment'];
-            SystemNotification::register($user_id, 'Trabalho Reprovado', $comment, 'class=CreateAcademicWork', '');
+
+            SystemNotification::register($user_id, 'Trabalho Reprovado', $comment, 'Ver');
 
             TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
 
