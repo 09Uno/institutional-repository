@@ -253,8 +253,17 @@ INSERT INTO system_group_program VALUES(76,1,10);
 --permisão para o admin acessar a pagina aprovar trabalhos
 INSERT INTO system_group_program VALUES(77,1,63);
 
+--Permissão para acessar as páginas de lista notificação
+INSERT INTO system_group_program VALUES(78,1,19);
+INSERT INTO system_group_program VALUES(79,2,19);
+
+--permissão para acessar o forms de notificação
+INSERT INTO system_group_program VALUES(80,1,20);
+INSERT INTO system_group_program VALUES(81,2,20);
+
 ---permissão para o admin acessar a listagem de trabalhos
 INSERT INTO system_group_program VALUES(128,1,64);
+
 
 
 

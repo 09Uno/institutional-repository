@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu>
+  <menuitem label="Ver Posts">
+    <action>SystemPostFeedView</action>
+    <icon>fas:bullhorn fa-fw</icon>
+  </menuitem>
   <menuitem label="Listar Trabalhos">
     <action>ListApprovedWorks</action>
     <icon>fas:align-justify fa-fw</icon>
@@ -8,11 +12,24 @@
     <action>CreateAcademicWork</action>
     <icon>fas:file-alt fa-fw</icon>
   </menuitem>
-  <menuitem label="Revisar Trabalhos">
-    <action>ReviewWork</action>
-    <icon>fas:address-card fa-fw</icon>
+  <menuitem label="Administração ">
+    <icon>fas:ad fa-fw</icon>
+    <menu>
+      <menuitem label="Revisar Trabalhos">
+        <action>ReviewWork</action>
+        <icon>fas:check fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{News management}">
+        <action>SystemPostList</action>
+        <icon>fas:edit fa-fw</icon>
+      </menuitem>
+      <menuitem label="_t{Contacts}">
+        <action>SystemContactsList</action>
+        <icon>fas:user-friends fa-fw</icon>
+      </menuitem>
+    </menu>
   </menuitem>
-  <menuitem label="_t{Administration}">
+  <menuitem label="Administração Mestre">
     <icon>fas:home fa-fw</icon>
     <menu>
       <menuitem label="Dashboard">
@@ -34,10 +51,6 @@
       <menuitem label="_t{Users}">
         <action>SystemUserList</action>
         <icon>fas:user fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{Contacts}">
-        <action>SystemContactsList</action>
-        <icon>far:address-card fa-fw</icon>
       </menuitem>
       <menuitem label="_t{Database explorer}">
         <action>SystemDatabaseExplorer</action>
@@ -66,91 +79,6 @@
       <menuitem label="_t{Preferences}">
         <action>SystemPreferenceForm#method=onEdit</action>
         <icon>fas:cog fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
-  <menuitem label="_t{Documents}">
-    <icon>far:file-alt fa-fw</icon>
-    <menu>
-      <menuitem label="_t{Documents}">
-        <action>SystemDriveList</action>
-        <icon>fas:box fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{Categories}">
-        <action>SystemDocumentCategoryFormList</action>
-        <icon>fas:th fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
-  <menuitem label="_t{Posts}">
-    <icon>far:newspaper fa-fw</icon>
-    <menu>
-      <menuitem label="_t{News management}">
-        <action>SystemPostList</action>
-        <icon>fas:pen-square fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{List news}">
-        <action>SystemPostFeedView</action>
-        <icon>fas:newspaper fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
-  <menuitem label="Wiki">
-    <icon>fas:globe fa-fw</icon>
-    <menu>
-      <menuitem label="_t{Page management}">
-        <action>SystemWikiList</action>
-        <icon>fab fa fa-fw fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{Search pages}">
-        <action>SystemWikiSearchList</action>
-        <icon>fa fa fa-fw fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
-  <menuitem label="Logs">
-    <icon>fas:desktop fa-fw</icon>
-    <menu>
-      <menuitem label="Dashboard">
-        <action>SystemLogDashboard</action>
-        <icon>fas:tachometer-alt fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{Access Log}">
-        <action>SystemAccessLogList</action>
-        <icon>fas:key fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{Change Log}">
-        <action>SystemChangeLogView</action>
-        <icon>fas:film fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{SQL Log}">
-        <action>SystemSqlLogList</action>
-        <icon>fas:database fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{Request Log}">
-        <action>SystemRequestLogList</action>
-        <icon>fas:globe fa-fw</icon>
-      </menuitem>
-      <menuitem label="_t{PHP Log}">
-        <action>SystemPHPErrorLogView</action>
-        <icon>fas:exclamation-triangle fa-fw</icon>
-      </menuitem>
-      <menuitem label="Session dump">
-        <action>SystemSessionDumpView</action>
-        <icon>fas:code fa-fw</icon>
-      </menuitem>
-    </menu>
-  </menuitem>
-  <menuitem label="Common pages">
-    <menu>
-      <menuitem label="Common page 1">
-        <action>CommonPage</action>
-      </menuitem>
-      <menuitem label="Common page 2">
-        <action>CommonPage</action>
-      </menuitem>
-      <menuitem label="Common page 3">
-        <action>CommonPage</action>
       </menuitem>
     </menu>
   </menuitem>

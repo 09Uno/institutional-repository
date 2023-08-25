@@ -36,7 +36,7 @@ class SystemNotification extends TRecord
     /**
      * Register notification
      */
-    public static function register( $user_to, $subject, $message, $action, $label, $icon = null, $date = null)
+    public static function register( $user_to, $subject, $message, $label, $action = null,  $icon = null, $date = null)
     {
         if ($action instanceof TAction)
         {

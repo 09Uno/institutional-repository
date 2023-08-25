@@ -43,13 +43,13 @@
         $(function() {
             $.get('engine.php?class=SearchBox', function(data)
             {
-              $('.navbar-custom-menu').append(data).show();
-              var search_box = $('.navbar-nav').nextAll('div');
-              search_box.css('padding-top', '10px');
-              search_box.css('padding-left', '25px');
-              search_box.css('display', 'table');
-              search_box.css('float', 'left');
-              search_box.attr('id', 'search-box');
+            //  $('.navbar-custom-menu').append(data).show();
+            //  var search_box = $('.navbar-nav').nextAll('div');
+             // search_box.css('padding-top', '10px');
+             // search_box.css('padding-left', '25px');
+             // search_box.css('display', 'table');
+             // search_box.css('float', 'left');
+             // search_box.attr('id', 'search-box');
             });
             
             update_messages_menu();
@@ -87,20 +87,20 @@
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+              <!--
               <li class="dropdown messages-menu" id="envelope_messages">
-                  <!-- /.dropdown-messages -->
               </li>
-              
+              -->
               <li class="dropdown notifications-menu" id="envelope_notifications">
                   <!-- /.dropdown-messages -->
               </li>
-              
+               <!-- 
               <li class="dropdown notifications-menu" id="support">
                 <a generator="adianti" href="index.php?class=SystemSupportForm">
                     <i class="fa fa-life-ring fa-fw"></i>
                 </a>
               </li>
-              
+            -->
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
