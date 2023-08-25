@@ -101,17 +101,13 @@ class ReviewWork extends TPage
             echo "Error: " . $e->getMessage();
         }
 
-
-
     }
-
 
     function testePHP()
     {
 
 
     }
-
     function onFileClick($param)
     {
         TTransaction::open('works');
@@ -135,9 +131,6 @@ class ReviewWork extends TPage
                  
                     $window->add($object);
                     $window->show();
-
-
-
 
                 } else {
                     echo 'Arquivo não encontrado.';
@@ -188,8 +181,8 @@ class ReviewWork extends TPage
                 $comment = $param['comment'];
 
 
-                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'Ver', 'class=CreateAcademicWork');
-
+                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'Ver Trabalhos', 'class=ListApprovedWorks', 'fas:check-circle');
+                
             }
             TTransaction::close();
 
@@ -238,11 +231,9 @@ class ReviewWork extends TPage
             $work->delete();
             $comment = $param['comment'];
 
-            SystemNotification::register($user_id, 'Trabalho Reprovado', $comment, 'Ver');
-
+            SystemNotification::register($user_id, 'Trabalho não foi aprovado', $comment, 'Ver Trabalhos', 'class=ListApprovedWorks', 'fas:check-circle');
+            
             TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
-
-
 
             TTransaction::close();
         } catch (Exception $e) {
