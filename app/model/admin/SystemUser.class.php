@@ -22,7 +22,7 @@ class SystemUser extends TRecord
     private $system_user_groups = array();
     private $system_user_programs = array();
     private $system_user_units = array();
-
+    
     /**
      * Constructor method
      */
@@ -48,10 +48,10 @@ class SystemUser extends TRecord
     /**
      * Returns the phone trimmed
      */
-    public function get_phone_trim()
-    {
-        return preg_replace("/[^0-9]/", '', $this->phone );
-    }
+   // public function get_phone_trim()
+   // {
+     //   return preg_replace("/[^0-9]/", '', $this->phone );
+    //}
     
     /**
      * Clone the entire object and related ones
