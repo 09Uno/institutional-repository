@@ -294,7 +294,7 @@ INSERT INTO system_group_program VALUES(73,2,61);
 --- Dá a permissão ao standard e ao admin a acessar o cadastro de trabalhos
 INSERT INTO system_group_program VALUES(74,2,62);
 INSERT INTO system_group_program VALUES(75,1,62);
-INSERT INTO system_group_program VALUES(75,3,62);
+INSERT INTO system_group_program VALUES(175,3,62);
 
 
 ---permissão para o admin acessar a welcome page
