@@ -68,8 +68,10 @@ CREATE TABLE system_user_old_password (
     created_at timestamp,
     FOREIGN KEY(system_user_id) REFERENCES system_user(id));
 
+--ROLES DE USUÁRIOS
 INSERT INTO system_group VALUES(1,'Admin');
 INSERT INTO system_group VALUES(2,'Standard');
+INSERT INTO system_group VALUES(3,'Moderator');
 
  --- TODAS AS PÁGINAS QUE O USUÁRIO PODE ACESSAR, É NECESSÁRIO INSERIR AQUI QUANDO CRIAR UMA NOVA PÁGINA
 
@@ -141,7 +143,8 @@ INSERT INTO system_program VALUES(61,'System Wiki view', 'SystemWikiView');
             --- cadastrar a página de listar trabalho acadêmicos
             INSERT INTO system_program VALUES(64,'List Approved Work ', 'ListApprovedWorks');
 
-            
+            --
+
 INSERT INTO system_user VALUES(1,'Administrator','admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.net','Y','+123 456 789','Admin Street, 123','Administrator','I''m the administrator',NULL,NULL,10,NULL,'Y');
 INSERT INTO system_user VALUES(2,'User','user','ee11cbb19052e40b07aac0ca060c23ee','user@user.net','Y','+123 456 789','User Street, 123','End user','I''m the end user',NULL,NULL,7,NULL,'Y');
 
@@ -161,6 +164,7 @@ INSERT INTO system_user_unit VALUES(4,2,2);
 
 
 ---Os programas que os usuários tem acesso (controllers, ou páginas)
+--(id,system_group_id,system_program_id)
 
 INSERT INTO system_group_program VALUES(1,1,1);
 INSERT INTO system_group_program VALUES(2,1,2);
@@ -173,15 +177,42 @@ INSERT INTO system_group_program VALUES(8,1,9);
 INSERT INTO system_group_program VALUES(9,1,11);
 INSERT INTO system_group_program VALUES(10,1,14);
 INSERT INTO system_group_program VALUES(11,1,15);
+--Página de bem vindos
 INSERT INTO system_group_program VALUES(12,2,10);
+
+
 INSERT INTO system_group_program VALUES(13,2,12);
-INSERT INTO system_group_program VALUES(14,2,13);
-INSERT INTO system_group_program VALUES(15,2,16);
+
+--visualização de perfil
+INSERT INTO system_group_program VALUES(14,1,13);
+INSERT INTO system_group_program VALUES(115,2,13);
+INSERT INTO system_group_program VALUES(116,3,13);
+
+--formulário de mensagens
+INSERT INTO system_group_program VALUES(15,1,16);
+INSERT INTO system_group_program VALUES(356,2,16);
+INSERT INTO system_group_program VALUES(157,3,16);
+
+
+
 INSERT INTO system_group_program VALUES(16,2,17);
 INSERT INTO system_group_program VALUES(17,2,18);
-INSERT INTO system_group_program VALUES(18,2,19);
-INSERT INTO system_group_program VALUES(19,2,20);
+
+--Permissão de ver página de lista de notificações
+INSERT INTO system_group_program VALUES(18,1,19);
+INSERT INTO system_group_program VALUES(181,2,19);
+INSERT INTO system_group_program VALUES(182,3,19);
+
+
+--Permissão para pagina de formulário de notificações 
+INSERT INTO system_group_program VALUES(19,1,20);
+INSERT INTO system_group_program VALUES(191,2,20);
+INSERT INTO system_group_program VALUES(192,3,20);
+
+
 INSERT INTO system_group_program VALUES(20,1,21);
+
+
 INSERT INTO system_group_program VALUES(25,1,26);
 INSERT INTO system_group_program VALUES(26,1,27);
 INSERT INTO system_group_program VALUES(27,1,28);
@@ -206,17 +237,40 @@ INSERT INTO system_group_program VALUES(46,1,46);
 INSERT INTO system_group_program VALUES(47,1,47);
 INSERT INTO system_group_program VALUES(48,1,48);
 INSERT INTO system_group_program VALUES(49,1,49);
+
+--Permissão de ver página de lista gem de postagens (administração de postagens)
 INSERT INTO system_group_program VALUES(52,1,52);
+INSERT INTO system_group_program VALUES(153,3,52);
+
+
+--Permissão de ver página de criar postagens (administração de postagens)
 INSERT INTO system_group_program VALUES(53,1,53);
+INSERT INTO system_group_program VALUES(154,3,53);
+
+
+
+--Permissão para pagina de feed
 INSERT INTO system_group_program VALUES(54,1,54);
-INSERT INTO system_group_program VALUES(55,1,55);
+INSERT INTO system_group_program VALUES(62,2,54);
+INSERT INTO system_group_program VALUES(156,3,54);
+
+
+
+--permissão para acessar lista de comentários (administração de comentários)
 INSERT INTO system_group_program VALUES(56,1,56);
+INSERT INTO system_group_program VALUES(72,2,56);
+INSERT INTO system_group_program VALUES(172,2,56);
+
+
+
+--Permissão de ver página de contatos
 INSERT INTO system_group_program VALUES(57,1,57);
+INSERT INTO system_group_program VALUES(158,3,57);
+
 INSERT INTO system_group_program VALUES(58,1,58);
 INSERT INTO system_group_program VALUES(59,1,59);
 INSERT INTO system_group_program VALUES(60,1,60);
 INSERT INTO system_group_program VALUES(61,1,61);
-INSERT INTO system_group_program VALUES(62,2,54);
 INSERT INTO system_group_program VALUES(63,2,60);
 
 INSERT INTO system_group_program VALUES(64,2,43);
@@ -226,8 +280,13 @@ INSERT INTO system_group_program VALUES(67,2,46);
 INSERT INTO system_group_program VALUES(68,2,47);
 INSERT INTO system_group_program VALUES(69,2,48);
 INSERT INTO system_group_program VALUES(70,2,49);
+
+--Permissões para formulário de comentários
 INSERT INTO system_group_program VALUES(71,2,55);
-INSERT INTO system_group_program VALUES(72,2,56);
+INSERT INTO system_group_program VALUES(55,1,55);
+INSERT INTO system_group_program VALUES(256,3,55);
+
+
 
 INSERT INTO system_group_program VALUES(73,2,61);
 
@@ -235,24 +294,21 @@ INSERT INTO system_group_program VALUES(73,2,61);
 --- Dá a permissão ao standard e ao admin a acessar o cadastro de trabalhos
 INSERT INTO system_group_program VALUES(74,2,62);
 INSERT INTO system_group_program VALUES(75,1,62);
+INSERT INTO system_group_program VALUES(75,3,62);
+
 
 ---permissão para o admin acessar a welcome page
 INSERT INTO system_group_program VALUES(76,1,10);
 
---permisão para o admin acessar a pagina aprovar trabalhos
+--permisão para o acessar a pagina aprovar trabalhos
 INSERT INTO system_group_program VALUES(77,1,63);
+INSERT INTO system_group_program VALUES(177,3,63);
 
---Permissão para acessar as páginas de lista notificação
-INSERT INTO system_group_program VALUES(78,1,19);
-INSERT INTO system_group_program VALUES(79,2,19);
-
---permissão para acessar o forms de notificação
-INSERT INTO system_group_program VALUES(80,1,20);
-INSERT INTO system_group_program VALUES(81,2,20);
 
 ---permissão para o admin acessar a listagem de trabalhos
 INSERT INTO system_group_program VALUES(128,1,64);
-
+INSERT INTO system_group_program VALUES(130,2,64);
+INSERT INTO system_group_program VALUES(131,3,64);
 
 
 INSERT INTO system_user_program VALUES(1,2,7);
