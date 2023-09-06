@@ -50,9 +50,10 @@ class ListApprovedWorks extends TPage
             }
 
             foreach ($academic_works as $academic_work) {
-                $authors = explode(',', $academic_work['author']);
-                $advisors = explode(',', $academic_work['advisor']);
+                $authors = explode('.', $academic_work['author']);
+                $advisors = explode('.', $academic_work['advisor']);
 
+                
                 $work_id = $academic_work['id'];
 
                 $html = new THtmlRenderer('app/resources/work-approved-list.html');
@@ -65,18 +66,23 @@ class ListApprovedWorks extends TPage
                     'file-label' => 'Arquivo PDF',
                     'work_id' => $work_id,
                 ];
+                $advisorReplace = [];
+                foreach ($advisors as $advisor) {
+                    $advisorReplace[] = ['advisors' => $advisor];
+                }
 
-                $advisorReplace = array_map(function ($advisor) {
-                    return ['advisor' => $advisor];
-                }, $advisors);
+                $authorReplace = [];
+                foreach ($authors as $author) {
+                    $i = array_keys($authors);
+                    $authorReplace[] = [
+                        'authors' => $author,
+                    ];
+                }
 
-                $authorReplace = array_map(function ($author) {
-                    return ['author' => $author];
-                }, $authors);
-
+                
                 $html->enableSection('main', $replaces);
-                $html->enableSection('advisor', $advisorReplace);
-                $html->enableSection('author', $authorReplace);
+                $html->enableSection('advisors', $advisorReplace, true);
+                $html->enableSection('authors', $authorReplace, true);
 
                 $vbox = new TVBox;
                 $vbox->style = 'width: 100%';
