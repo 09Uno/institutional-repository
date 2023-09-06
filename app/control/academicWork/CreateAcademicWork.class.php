@@ -29,11 +29,11 @@ class CreateAcademicWork extends TPage
         
         parent::add($this->form);
     
-
+        $authors = new TEntry('authors');
         
         $title = new TEntry('title');
-        $author = new TEntry('author');
-        $advisor = new TEntry('advisor');
+        $author = new TEntry('author[]');
+        $advisor = new TEntry('advisor[]');
         // $co_advisor = new TEntry('co_advisor');
         $abstract = new TText('abstract');
         $keywords = new TMultiEntry('keywords');
@@ -41,12 +41,31 @@ class CreateAcademicWork extends TPage
         $research_area = new TEntry('research_area');
         $file = new TFile('file');
         
+        $this->fieldlist = new TFieldList;
+        $this->fieldlist->generateAria();
+        $this->fieldlist->width = '100%';
+        $this->fieldlist->name = 'Autor';
+        $this->fieldlist->addField( '', $author, ['width' => '100%'] );
+
+
+        $this->fieldlist2 = new TFieldList;
+        $this->fieldlist2->generateAria();
+        $this->fieldlist2->width = '100%';
+        $this->fieldlist2->name = 'Orientador';
+        $this->fieldlist2->addField( '', $advisor, ['width' => '100%'] );
+
 
         $this->form->addFields([new TLabel('Título do trabalho')], [$title]);
-        $this->form->addFields([new TLabel('Autor')], [$author],
-                                [new TLabel('Orientador')], [$advisor]);
+//$this->form->addFields([$this->fieldlist], [$author],
+                   //          [$this->fieldlist2], [$advisor]);
         // $this->form->addFields([new TLabel('Co-orientador')], [$co_advisor]);
+
+        //$this->form->addField($advisor);       
+
         $this->form->addFields([new TLabel('Resumo')], [$abstract]);
+        $this->form->addContent([ new Tlabel ('Autores')] , [$this->fieldlist] , 
+                                [ new Tlabel ('Orientadores')] , [$this->fieldlist2]
+        );
         $this->form->addFields([new TLabel('Palavras-chave')], [$keywords]);
         $this->form->addFields([new TLabel('Data de apresentação')], [$presentation_date]);
         $this->form->addFields([new TLabel('Área de pesquisa')], [$research_area]);
@@ -55,11 +74,18 @@ class CreateAcademicWork extends TPage
 
         $this->form->addAction('Salvar', new TAction([$this, 'onSave']), 'fa:save green');
         
+        $this->fieldlist->addHeader();
+        $this->fieldlist->addDetail( new stdClass );
+        $this->fieldlist->addCloneAction();
 
+        $this->fieldlist2->addHeader();
+        $this->fieldlist2->addDetail( new stdClass );
+        $this->fieldlist2->addCloneAction();
 
         $title-> setSize('100%');
         $author-> setSize('100%');
         $advisor-> setSize('100%');
+
         // $co_advisor-> setSize('50%');
         $abstract-> setSize('100px', 80);
         $keywords-> setSize('100%');
@@ -72,21 +98,25 @@ class CreateAcademicWork extends TPage
 
         $research_area-> setSize('100%');
 
+    
         $file->setAllowedExtensions( ['pdf'] );
         $file->enableFileHandling();
-  
+
     }
 
     public function onSave($param){
         try{
 
             $data = $this->form->getData();
+            $authorToReq = $param['author'];
+            $advisorToReq = $param['advisor'];
+
 
             TTransaction::open('works');
             $academic_work = new AcademicWork;    
             $academic_work->title = $data->title;
-            $academic_work->author = $data->author;
-            $academic_work->advisor = $data->advisor;
+            $academic_work->author = json_encode($authorToReq);
+            $academic_work->advisor = json_encode($advisorToReq);
             // $academic_work->co_advisor = $this->form->getData('co_advisor');
             $academic_work->abstract = $data->abstract;
             $academic_work->keywords = json_encode($data->keywords);
@@ -98,9 +128,6 @@ class CreateAcademicWork extends TPage
             $academic_work->store();
 
             new TMessage('info', 'Trabalho cadastrado com sucesso!');
-
-            
-
             TTransaction::close();
 
         }catch(Exception $e){
