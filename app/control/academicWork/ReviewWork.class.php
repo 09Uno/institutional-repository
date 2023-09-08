@@ -194,6 +194,59 @@ class ReviewWork extends TPage
 
     }
 
+    function onReviewClick(){
+        
+        $work_id = $_GET['work_id'];
+        $action1 = new TAction(array($this, 'onReview'));
+        $action2 = new TAction(array($this, 'onAction2'));
+
+        $action1->setParameter('parameter', $work_id);
+        $action2->setParameter('parameter', 2);
+
+        $form = new BootstrapFormBuilder('form_approve');
+        $comment = new TText('comment');
+        $form->addFields([new TLabel('Comentário')], [$comment]);
+        $form->addAction('Enviar', $action1, 'fa:save green');
+        $form->addAction('Cancelar', $action2, 'fa:save red');
+
+        new TInputDialog('Solicitar Correção', $form);
+        TScript::create(" tmenubox_open('Aprovar Trabalho', '{$form}'); ");
+    }
+
+    public static function onReview($param){
+        
+        try {
+
+            TTransaction::open('works');
+            $work_id = $param['parameter'];
+            $work = AcademicWork::find($work_id);
+
+            if ($work != null) {
+                $work->isApproved = 0;
+                $work->store();
+                $user_id = $work->user_id;
+
+                $comment = $param['comment'];
+
+
+                //SystemNotification::register($user_id, 'Revise seu trabalho', $comment, '', 'class=ListApprovedWorks', 'fas:check-circle');
+                SystemNotification::register(
+                    $user_id,
+                    'Revise seu trabalho',
+                    $comment,
+                    'Ver Trabalhos',
+                    'class=EditAcademicWork&method=onEdit&work_id=' . $work_id,
+                    'fas:check-circle'
+                );
+            }
+            TTransaction::close();
+
+        } catch (Exception $e) {
+            TToast::show('error', 'Erro ao realizar ação', 'top right', 'fas:exclamation-triangle');
+        }
+            
+    }
+
     public static function onAction2()
     {
         TToast::show('show', 'Ação cancelada', 'top right', 'fas:exclamation-triangle');
@@ -240,8 +293,4 @@ class ReviewWork extends TPage
             TToast::show('error', 'Erro ao realizar ação', 'top right', 'fas:exclamation-triangle');
         }
     }
-
-
-
-
 }

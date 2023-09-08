@@ -143,7 +143,10 @@ INSERT INTO system_program VALUES(61,'System Wiki view', 'SystemWikiView');
             --- cadastrar a página de listar trabalho acadêmicos
             INSERT INTO system_program VALUES(64,'List Approved Work ', 'ListApprovedWorks');
 
-            --
+
+            --Cadastrar página de edição de novos trabalhos 
+            INSERT INTO system_program VALUES(65,'Edit Work', 'EditAcademicWork');
+
 
 INSERT INTO system_user VALUES(1,'Administrator','admin','21232f297a57a5a743894a0e4a801fc3','admin@admin.net','Y','+123 456 789','Admin Street, 123','Administrator','I''m the administrator',NULL,NULL,10,NULL,'Y');
 INSERT INTO system_user VALUES(2,'User','user','ee11cbb19052e40b07aac0ca060c23ee','user@user.net','Y','+123 456 789','User Street, 123','End user','I''m the end user',NULL,NULL,7,NULL,'Y');
@@ -312,3 +315,12 @@ INSERT INTO system_group_program VALUES(131,3,64);
 
 
 INSERT INTO system_user_program VALUES(1,2,7);
+
+
+-- Permissão para acessar página de edição de trabalhos
+INSERT INTO system_group_program VALUES(78,1,65);
+INSERT INTO system_group_program VALUES(179,3,65);
+INSERT INTO system_group_program VALUES(178,3,65);
+
+
+--http://localhost/modelo/index.php?class=SystemNotificationFormView&method=onExecuteAction&id=31
