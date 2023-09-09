@@ -64,7 +64,7 @@ class SystemNotificationList extends TStandardList
         $this->datagrid->style = 'width: 100%';
 
         // creates the datagrid columns
-        $column_checked = new TDataGridColumn('action', _t('Action'), 'center');
+        $column_checked = new TDataGridColumn('action', '', 'center');
         $column_message = new TDataGridColumn('message', _t('Message'), 'left');
         
         $column_message->setTransformer( function($value, $object, $row) {
@@ -84,12 +84,15 @@ class SystemNotificationList extends TStandardList
             {
                 $row->style = "color:gray";
             }
+            
+            $message = "";
+
             $wrapper = new TElement('div');
             $wrapper->style = 'padding: 10px';
-            $wrapper->add( '<b>'.$name . '</b>' .
+            $wrapper->add( '<b>'.$name .  '</b>' .
                            '<div style="float:right"><p red"/> '.substr($object->dt_message, 0, 10) . '</div><br>' .
                            '<b>'.$object->subject . '</b> <br>' .
-                           $object->message );
+                           $message );
             return $wrapper;
         });
         
@@ -138,6 +141,7 @@ class SystemNotificationList extends TStandardList
             $button->class = 'btn btn-default';
             //$button->style="width:160px";
             
+
             if ($object->checked == 'Y')
             {
                 $button->href = 'index.php?class=SystemNotificationList&method=onUnCheck&id='.$object->id;
