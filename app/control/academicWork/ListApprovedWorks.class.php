@@ -17,24 +17,29 @@ class ListApprovedWorks extends TPage
         parent::__construct();
 
         $this->form = new BootstrapFormBuilder;
-        $this->form->setFormTitle('Digite o Título do Trabalho');
-        $this->form->generateAria();
-
+        $this->form->setFormTitle('Trabalhos Acadêmicos Aprovados');
         try {
+            $this->form->generateAria();
+
             $search = new TEntry('title');
-            $this->form->addFields([new TLabel('')], [$search]);
+            $search->setSize('100%');
+            //$search->addStyle('margin-right: auto; margin-left: auto;'); // Adicione esta linha
+            $search->{'placeholder'} = 'Digite o título, autores ou orientadores do trabalho acadêmico...';
+
+            $this->form->addFields([$search]);
             $this->form->addAction(
                 'Buscar',
                 new TAction([$this, 'onSearch'], ['param' => ['title' => $search->getValue()]]),
-                'fa:search blue'
+                'fa:search blue' , 'btn-primary'
             );
-            $search->setSize('100%');
+
 
             $vbox = new TVBox;
             $vbox->add(new TXMLBreadCrumb('menu.xml', __CLASS__));
             $vbox->style = 'width: 100%';
             $vbox->add($this->form);
             parent::add($vbox);
+
 
             $dataForm = $this->form->getData();
             $academic_works = [];
@@ -53,7 +58,7 @@ class ListApprovedWorks extends TPage
                 $authors = explode('.', $academic_work['author']);
                 $advisors = explode('.', $academic_work['advisor']);
 
-                
+
                 $work_id = $academic_work['id'];
 
                 $html = new THtmlRenderer('app/resources/work-approved-list.html');
@@ -79,7 +84,7 @@ class ListApprovedWorks extends TPage
                     ];
                 }
 
-                
+
                 $html->enableSection('main', $replaces);
                 $html->enableSection('advisors', $advisorReplace, true);
                 $html->enableSection('authors', $authorReplace, true);
@@ -98,7 +103,7 @@ class ListApprovedWorks extends TPage
     {
         TTransaction::open('works');
         $con = TTransaction::get();
-        $result = $con->query('SELECT * FROM academics_works WHERE isApproved = 1 AND title LIKE "%' . $param['title'] . '%"');
+        $result = $con->query('SELECT * FROM academics_works WHERE isApproved = 1 AND (title LIKE "%' . $param['title'] . '%" OR author LIKE "%' . $param['title'] . '%" OR advisor LIKE "%' . $param['title'] . '%")');
         $academic_works = $result->fetchAll();
         TTransaction::close();
         return $academic_works;
@@ -124,7 +129,7 @@ class ListApprovedWorks extends TPage
                     $object->data = $file_name;
                     $object->type = 'application/pdf';
                     $object->style = "width: 100%; height: calc(100% - 10px)";
-                 
+
                     $window->add($object);
                     $window->show();
 

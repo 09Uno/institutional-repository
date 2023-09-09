@@ -128,7 +128,7 @@ class ReviewWork extends TPage
                     $object->data = $file_name;
                     $object->type = 'application/pdf';
                     $object->style = "width: 100%; height: calc(100% - 10px)";
-                 
+
                     $window->add($object);
                     $window->show();
 
@@ -158,8 +158,11 @@ class ReviewWork extends TPage
         $form = new BootstrapFormBuilder('form_approve');
         $comment = new TText('comment');
         $form->addFields([new TLabel('Comentário')], [$comment]);
+        $comment->setSize(350, 200); // Largura de 500px e altura de 80px
+        $comment->setProperty('style', 'resize: both;'); // Permite redimensionamento horizontal e vertical
         $form->addAction('Aprovar', $action1, 'fa:save green');
         $form->addAction('Cancelar', $action2, 'fa:save red');
+        
 
         new TInputDialog('Aprovar Trabalho', $form);
         TScript::create(" tmenubox_open('Aprovar Trabalho', '{$form}'); ");
@@ -182,7 +185,7 @@ class ReviewWork extends TPage
 
 
                 SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'Ver Trabalhos', 'class=ListApprovedWorks', 'fas:check-circle');
-                
+
             }
             TTransaction::close();
 
@@ -194,8 +197,9 @@ class ReviewWork extends TPage
 
     }
 
-    function onReviewClick(){
-        
+    function onReviewClick()
+    {
+
         $work_id = $_GET['work_id'];
         $action1 = new TAction(array($this, 'onReview'));
         $action2 = new TAction(array($this, 'onAction2'));
@@ -213,8 +217,9 @@ class ReviewWork extends TPage
         TScript::create(" tmenubox_open('Aprovar Trabalho', '{$form}'); ");
     }
 
-    public static function onReview($param){
-        
+    public static function onReview($param)
+    {
+
         try {
 
             TTransaction::open('works');
@@ -234,7 +239,7 @@ class ReviewWork extends TPage
                     $user_id,
                     'Revise seu trabalho',
                     $comment,
-                    'Ver Trabalhos',
+                    'Mensagem',
                     'class=EditAcademicWork&method=onEdit&work_id=' . $work_id,
                     'fas:check-circle'
                 );
@@ -244,7 +249,7 @@ class ReviewWork extends TPage
         } catch (Exception $e) {
             TToast::show('error', 'Erro ao realizar ação', 'top right', 'fas:exclamation-triangle');
         }
-            
+
     }
 
     public static function onAction2()
@@ -284,8 +289,8 @@ class ReviewWork extends TPage
             $work->delete();
             $comment = $param['comment'];
 
-            SystemNotification::register($user_id, 'Trabalho não foi aprovado', $comment, 'Ver Trabalhos', 'class=ListApprovedWorks', 'fas:check-circle');
-            
+            SystemNotification::register($user_id, 'Trabalho não foi aprovado', $comment, 'Ver Mensagem', 'class=ListApprovedWorks', 'fas:check-circle');
+
             TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
 
             TTransaction::close();
