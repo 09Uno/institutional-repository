@@ -73,7 +73,7 @@ class SystemRegistrationForm extends TPage
         $this->form->addFields( [new TLabel(_t('Phone'), 'red')],    [$phone] );
         $this->form->addFields( [new TLabel(_t('Password'), 'red')], [$password] );
         $this->form->addFields( [new TLabel(_t('Password confirmation'), 'red')], [$repassword] );
-        $this->form->addFields( [new TLabel(_t('Group'), 'red')], [$group] );
+       // $this->form->addFields( [new TLabel(_t('Group'), 'red')], [$group] );
 
         // add the container to the page
         $wrapper = new TElement('div');
@@ -160,7 +160,7 @@ class SystemRegistrationForm extends TPage
             
             $default_groups = explode(',', $ini['permission']['default_groups']);
 
-            $group_id =  [$param['group']];
+          //  $group_id =  [$param['group']];
            
             // if( $group_id )
             // {

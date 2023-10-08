@@ -111,12 +111,13 @@ class CreateAcademicWork extends TPage
             $authorToReq = $param['author'];
             $advisorToReq = $param['advisor'];
 
+            mb_internal_encoding("UTF-8");
 
             TTransaction::open('works');
             $academic_work = new AcademicWork;    
             $academic_work->title = $data->title;
-            $academic_work->author = json_encode($authorToReq);
-            $academic_work->advisor = json_encode($advisorToReq);
+            $academic_work->author = json_encode($authorToReq, JSON_UNESCAPED_UNICODE);
+            $academic_work->advisor = json_encode($advisorToReq , JSON_UNESCAPED_UNICODE);
             // $academic_work->co_advisor = $this->form->getData('co_advisor');
             $academic_work->abstract = $data->abstract;
             $academic_work->keywords = json_encode($data->keywords);
