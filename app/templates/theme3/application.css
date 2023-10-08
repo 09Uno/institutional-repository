@@ -4,6 +4,10 @@
 
 /** personalizada **/
 
+body{
+    font-family: Neutro;
+}
+
 .work-title {
     font-size: 24px;
     font-weight: bold;
@@ -55,19 +59,19 @@
 
 /* Adicione cores personalizadas aqui */
 .work-title {
-    color: #337ab7;
+    color: #014c84;
 }
 
 .text-to-name {
-    color: #337ab7;
+    color: #000;
 }
 
 .presentation p {
-    color: #999;
+    color: #4b4b4b;
 }
 
 .keywords {
-    color: #5d81a0;
+    color: #700813;
     font-weight: bold;
     margin-right: 5px;
 }
@@ -821,6 +825,7 @@ section.content
 
 .main-header {
     z-index: 999 !important;
+
 }
 
 /** Profile **/
