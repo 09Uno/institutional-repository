@@ -55,8 +55,8 @@ class ListApprovedWorks extends TPage
             }
 
             foreach ($academic_works as $academic_work) {
-                $authors = explode('.', $academic_work['author']);
-                $advisors = explode('.', $academic_work['advisor']);
+                $authors = explode(',', $academic_work['author']);
+                $advisors = explode(',', $academic_work['advisor']);
 
 
                 $work_id = $academic_work['id'];
@@ -71,19 +71,27 @@ class ListApprovedWorks extends TPage
                     'file-label' => 'Arquivo PDF',
                     'work_id' => $work_id,
                 ];
+                
                 $advisorReplace = [];
-                foreach ($advisors as $advisor) {
-                    $advisorReplace[] = ['advisors' => $advisor];
-                }
+                    foreach ($advisors as $advisor) {
 
-                $authorReplace = [];
-                foreach ($authors as $author) {
-                    $i = array_keys($authors);
-                    $authorReplace[] = [
-                        'authors' => $author,
-                    ];
-                }
+                        $advisorr = str_replace("\"", "", $advisor);
+                        $advisorr = str_replace("[", "", $advisorr);
+                        $advisorr = str_replace("]", "", $advisorr);
+                        $advisorReplace[] = ['advisors' => $advisorr];
+                    }
 
+                    $authorReplace = [];
+                    foreach ($authors as $author) {
+                        $author = str_replace("\"", "", $author);
+                        $author = str_replace("[", "", $author);
+                        $author= str_replace("]", "", $author);
+                    
+                        $authorReplace[] = [
+                            'authors' => $author,
+                        ];
+                    }
+                    
 
                 $html->enableSection('main', $replaces);
                 $html->enableSection('advisors', $advisorReplace, true);

@@ -150,13 +150,13 @@ class SystemNotificationList extends TStandardList
             }
             else
             {
-                $button->href = 'index.php?class=SystemNotificationFormView&method=onExecuteAction&id='.$object->id;
+                $button->href = 'index.php?class=SystemNotificationFormView&method=onView&id='.$object->id;
                  $icon = $object->icon;
                 // $icon    = str_replace( 'fa fa-', 'fa:', $icon);
                //  $icon    = str_replace( 'far fa-', 'far:', $icon);
                 // $icon    = str_replace( 'fas fa-', 'fas:', $icon);
                  $button->add( new TImage( 'fa:archive gray') );
-                $button->add( TElement::tag('span', $object->action_label ) );
+                $button->add( TElement::tag('span', ('Ver Mensagem') ) );
                //$button->href = 'index.php?class=SystemNotificationList&method=onCheck&id='.$object->id;
                 //$button->add( new TImage('fa:archive gray') );
                //$button->add( TElement::tag('span', _t('Check as read'), array('style' =>'color:gray' ) ) );

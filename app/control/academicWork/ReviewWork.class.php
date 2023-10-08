@@ -70,17 +70,24 @@ class ReviewWork extends TPage
 
                     $advisorReplace = [];
                     foreach ($advisors as $advisor) {
-                        $advisorReplace[] = ['advisors' => $advisor];
+
+                        $advisorr = str_replace("\"", "", $advisor);
+                        $advisorr = str_replace("[", "", $advisorr);
+                        $advisorr = str_replace("]", "", $advisorr);
+                        $advisorReplace[] = ['advisors' => $advisorr];
                     }
 
                     $authorReplace = [];
                     foreach ($authors as $author) {
-                        $i = array_keys($authors);
+                        $author = str_replace("\"", "", $author);
+                        $author = str_replace("[", "", $author);
+                        $author= str_replace("]", "", $author);
+                    
                         $authorReplace[] = [
                             'authors' => $author,
                         ];
                     }
-
+                    
                     $html->enableSection('main', $replaces);
                     $html->enableSection('advisors', $advisorReplace, true);
                     $html->enableSection('authors', $authorReplace, true);
@@ -184,8 +191,8 @@ class ReviewWork extends TPage
                 $comment = $param['comment'];
 
 
-                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'Ver Trabalhos', 'class=ListApprovedWorks', 'fas:check-circle');
-
+                SystemNotification::register($user_id, 'Trabalho aprovado', $comment, 'Ver Mensagem', $work_id, 'fas:check-circle');
+                
             }
             TTransaction::close();
 
@@ -239,8 +246,8 @@ class ReviewWork extends TPage
                     $user_id,
                     'Revise seu trabalho',
                     $comment,
-                    'Mensagem',
-                    'class=EditAcademicWork&method=onEdit&work_id=' . $work_id,
+                    'Editar Trabalho',
+                    'class=EditAcademicWork&method=onEdit&work_id='.$work_id,
                     'fas:check-circle'
                 );
             }
@@ -269,11 +276,11 @@ class ReviewWork extends TPage
         $form = new BootstrapFormBuilder('form_approve');
         $comment = new TText('comment');
         $form->addFields([new TLabel('Comentário')], [$comment]);
-        $form->addAction('Desaprovar', $action1, 'fa:save green');
+        $form->addAction('Reprovar', $action1, 'fa:save green');
         $form->addAction('Cancelar', $action2, 'fa:save red');
 
         new TInputDialog('Reprovar Trabalho', $form);
-        TScript::create(" tmenubox_open('Desaprovar Trabalho', '{$form}'); ");
+        TScript::create(" tmenubox_open('Reprovar Trabalho', '{$form}'); ");
 
     }
 
@@ -289,7 +296,7 @@ class ReviewWork extends TPage
             $work->delete();
             $comment = $param['comment'];
 
-            SystemNotification::register($user_id, 'Trabalho não foi aprovado', $comment, 'Ver Mensagem', 'class=ListApprovedWorks', 'fas:check-circle');
+            SystemNotification::register($user_id, 'Trabalho não foi aprovado', $comment, 'Trabalhos Aprovados', 'class=ListApprovedWorks', 'fas:check-circle');
 
             TToast::show('show', 'Ação realizada com sucesso', 'top right', 'far:check-circle');
 
